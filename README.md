@@ -12,6 +12,22 @@ This repo is meant to be useful even if:
 
 ---
 
+## Installation
+
+### Option 1: Unity Package (recommended)
+
+1. Download the `.unitypackage` from the Releases page
+2. Double-click it or drag it into Unity
+3. Click Import
+
+Done.
+
+### Option 2: Manual
+
+Clone or download this repo and copy the folder into your Unity project.
+
+---
+
 ## What problem does this solve?
 
 Unity’s Animator is powerful, but for simple 2D games it can feel:
