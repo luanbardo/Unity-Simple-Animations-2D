@@ -1,17 +1,3 @@
-# SimpleAnimations2D 
-
-**SimpleAnimations2D** is a small, beginner‑friendly 2D animation tool for Unity.
-
-It lets you animate sprites and UI images **without using Unity’s Animator system**.  
-No Animator Controllers, no state machines, no transitions — just sprites changing frames over time.
-
-This repo is meant to be useful even if:
-- you’re new to Unity
-- you don’t like writing complex animation logic
-- you just want something quick that *works*
-
----
-
 ## Installation
 
 ### Option 1: Unity Package (recommended)
@@ -25,6 +11,20 @@ Done.
 ### Option 2: Manual
 
 Clone or download this repo and copy the folder into your Unity project.
+
+---
+
+# SimpleAnimations2D 
+
+**SimpleAnimations2D** is a small, beginner‑friendly 2D animation tool for Unity.
+
+It lets you animate sprites and UI images **without using Unity’s Animator system**.  
+No Animator Controllers, no state machines, no transitions — just sprites changing frames over time.
+
+This repo is meant to be useful even if:
+- you’re new to Unity
+- you don’t like writing complex animation logic
+- you just want something quick that *works*
 
 ---
 
