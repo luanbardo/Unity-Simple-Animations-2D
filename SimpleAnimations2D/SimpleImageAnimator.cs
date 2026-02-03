@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SimpleAnimations2D
 {
-    [RequireComponent(typeof(SpriteRenderer))]
-    public class SimpleSpriteAnimator : MonoBehaviour
+    [RequireComponent(typeof(Image))]
+    public class SimpleImageAnimator : MonoBehaviour
     {
         private readonly Dictionary<string, SimpleAnimatorClip> clipDictionary = new();
-        private SpriteRenderer spriteRenderer;
+        private Image image;
         private SimpleAnimatorClip currentClip;
         private SimpleAnimatorClip lastPlayedNonOneShotClip;
         private float frameTimer;
         private float currentClipFrameDuration;
         private float speed = 1;
-        private bool isVisible = true;
         private bool isCurrentClipOneShot;
 
         #region Inspector
@@ -34,13 +34,7 @@ namespace SimpleAnimations2D
         [Tooltip("Should the animation use unscaled time? (Recommended for UI)")]
         private bool useUnscaledTime;
 
-        [Header("Performance")]
-        [SerializeField]
-        [Tooltip("Should the animation keep playing when outside of camera view? (Recommended off for performance)")]
-        private bool playWhenNotVisible;
-
         #endregion
-
 
         #region Properties
 
@@ -104,7 +98,7 @@ namespace SimpleAnimations2D
 
         private void Awake()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            image = GetComponent<Image>();
 
             //Populating clip dictionary with all clips
             for (int i = 0; i < clips.Length; i++)
@@ -125,12 +119,6 @@ namespace SimpleAnimations2D
 
         private void Update()
         {
-            // One shot animations always play regardless of visibility
-            if (!isCurrentClipOneShot && !playWhenNotVisible && !isVisible)
-            {
-                return;
-            }
-
             if (!IsPlaying || !currentClip || currentClip.FrameRate <= 0f)
             {
                 return;
@@ -143,16 +131,6 @@ namespace SimpleAnimations2D
             {
                 AdvanceFrame();
             }
-        }
-
-        private void OnBecameInvisible()
-        {
-            isVisible = false;
-        }
-
-        private void OnBecameVisible()
-        {
-            isVisible = true;
         }
 
         #endregion
@@ -185,7 +163,7 @@ namespace SimpleAnimations2D
                 }
             }
 
-            spriteRenderer.sprite = currentClip.Frames[CurrentFrameIndex];
+            image.sprite = currentClip.Frames[CurrentFrameIndex];
             OnAnimationFrameStarted.Invoke(currentClip, CurrentFrameIndex);
         }
 
@@ -205,7 +183,7 @@ namespace SimpleAnimations2D
             isCurrentClipOneShot = isOneShot;
             currentClip = clip;
             CurrentFrameIndex = 0;
-            spriteRenderer.sprite = currentClip.Frames[CurrentFrameIndex];
+            image.sprite = currentClip.Frames[CurrentFrameIndex];
             frameTimer = 0f;
             currentClipFrameDuration = 1 / currentClip.FrameRate;
             OnAnimationStarted.Invoke(currentClip);
